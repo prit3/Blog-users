@@ -83,12 +83,12 @@
                     break;
 
                 case "naamDESC":
-                    $post = "SELECT * FROM BlogPosts ORDER BY Naam DESC";
+                    $post = "SELECT * FROM BlogPosts ORDER BY Name DESC";
                     echo "Blog is gesorteert op Naam van Z naar A";
                     break;
 
                 case "naamASC":
-                    $post = "SELECT * FROM BlogPosts ORDER BY Naam ASC";
+                    $post = "SELECT * FROM BlogPosts ORDER BY Name ASC";
                     echo "Blog is gesorteert op Naam van A naar Z";
                     break;
 
@@ -120,7 +120,7 @@
 
                                 echo "<tr>";
                                     echo "<td>"."Name: "."</td>";
-                                    echo "<td>".$row['Naam']."</td>"."<br>";
+                                    echo "<td>".$row['Name']."</td>"."<br>";
                                 echo "</tr>";
 
                                 echo "<tr>";

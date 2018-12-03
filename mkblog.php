@@ -2,13 +2,12 @@
 include ('dbconn.php');
 error_reporting(0);
 
-empty ($_POST["naam"]) ? $naam = "" : $naam = $_POST["naam"];
 
 empty ($_POST["title"]) ? $title = "" : $title = $_POST["title"];
 empty ($_POST["blogtext"]) ? $text = "" : $text = $_POST["blogtext"];
 
 $taged = $_POST['taged'];
-$mkblog = "INSERT INTO `BlogPosts` (id, Naam, Title, Blogtext, tijd) VALUES (NULL, '$naam', '$title', '$text', CURRENT_TIMESTAMP)";
+$mkblog = "INSERT INTO `BlogPosts` (id, Name, Title, Blogtext, tijd) VALUES (NULL, '$naam', '$title', '$text', CURRENT_TIMESTAMP)";
 
 
 

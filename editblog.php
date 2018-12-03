@@ -29,7 +29,7 @@ error_reporting(0);
                 if ($result->num_rows>0){
                 while ($row = $result->fetch_assoc()) {
 
-                        $naam = $row['Naam'];
+                        $naam = $row['Name'];
                         $title = $row['Title'];
                         $text = $row['Blogtext'];
                         $tags = $row['Tag_id'];
@@ -39,7 +39,7 @@ error_reporting(0);
                             echo "<form action='editblog.php?id=$id' method='post'>";
                             echo "Name:";
                             echo "<br>";
-                            echo "<input type='text' name='naam' placeholder='Naam' value='$naam'>";
+                            echo $naam;
                             echo "<br>";
                             echo "Title:";
                             echo "<br>";
@@ -64,21 +64,21 @@ error_reporting(0);
 <?php 
 
     if (isset($_POST['update'])){
-        if (!empty($_POST['naam']) && $_POST['title']){
-            $naam = $_POST['naam'];
-            $title = $_POST['title'];
-            $text = $_POST['blogtext'];
-            $up = "UPDATE `BlogPosts` SET `Naam` = '$naam', `Title` = '$title', `Blogtext` = '$text', `tijd` = CURRENT_TIME()  WHERE `BlogPosts`.`id`= $id";
-            
-            
-            mysqli_query($conn, $up);
-            header("location:viewblog.php");
-            
-        }
-        else {
-            echo "er ging wat fout";
-        }
+            if (!empty ($_POST['title'])){
+                $title = $_POST['title'];
+                $text = $_POST['blogtext'];
+                $up = "UPDATE `BlogPosts` SET `Title` = '$title', `Blogtext` = '$text', `tijd` = CURRENT_TIME()  WHERE `BlogPosts`.`id`= $id";
+
+
+                mysqli_query($conn, $up);
+                header("location:viewblog.php");
+
+            }
+            else {
+                echo "er ging wat fout";
+            }
     }
+            
 
 
 $conn->close();

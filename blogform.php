@@ -22,7 +22,7 @@
         <form action="blogform.php"  method="post">
              Auteurs Naam: 
             <br> 
-            <input type="text" name="naam" placeholder="Naam" value="<?php echo $naam; ?>">
+            <?php echo $naam; ?>
             <br>
             <br>
             Title: 
@@ -55,7 +55,7 @@
                 }
 
                 else {
-                    echo "<br>Er zijn geen comments";
+                    echo "<br>Er zijn geen Tags";
                 }
 
                $conn->close();
