@@ -1,4 +1,6 @@
-<?php include ('mkuser.php'); ?>
+<?php 
+    include ('mkuser.php'); 
+?>
 
 <style>
 * {

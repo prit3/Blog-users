@@ -1,3 +1,8 @@
+<?php
+session_start();     
+
+?>
+
 <html>
     <head>
         <style>
@@ -14,11 +19,24 @@
             .blogtxt:hover{
                 overflow: visible;
                 max-height: none;}
+            .sign {
+                margin-right: 20px;
+                float: right;}
         
         </style>
     </head>
     <body style="margin:0;">
         <header style="position: fixed; background-color:gray; width:100%; padding:10px;">
+                 <?php
+                
+                if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
+                    echo "<a href='login.php'><button class='sign'>login</button></a>";
+                }
+                else {
+                    echo "<a href='logout.php'><button class='sign'>logout</button></a>";
+                }
+                
+                ?>
             <a href="blogform.php"><button>create</button></a>
             <a href="viewblog.php"><button>view</button></a>
             <a href="showtags.php"><button>viewtags</button></a>
@@ -40,6 +58,9 @@
                     <option value="tuin">filter op tuin</option>
                 </select>
                 <input type="submit" name="update" value="Update">
+               
+
+                
             </form>
         </header>
         <div style="padding-top:110px; padding-left:10px;">
@@ -99,7 +120,7 @@
 
 
                 default:
-                    $post = "SELECT * FROM BlogPosts";
+                    $post = "SELECT * FROM BlogPosts ORDER BY BlogPosts.id DESC";
                     echo "Blog is gesorteert op nieuwste post";
             }
             
@@ -139,9 +160,10 @@
                         echo "<p class='blogtxt'>";
                             echo $row['Blogtext'];
                         echo "</p>";
-                        
-                        echo '<a href="editblog.php?id='.$row['id'].'">edit</a>',"&nbsp";
-                        echo '<a href="rmblog.php?id='.$row['id'].'">delete</a>';
+                        if ($_SESSION['user'] == $row['Name']){
+                            echo '<a href="editblog.php?id='.$row['id'].'">edit</a>',"&nbsp";
+                            echo '<a href="rmblog.php?id='.$row['id'].'">delete</a>';
+                        }
                     echo "</div>";
                         }
                     }

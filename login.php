@@ -1,18 +1,7 @@
 <?php
 include ('dbconn.php');
-
-
-$_SESSION["user"] = $userid;
+session_start();
     
-
-if (isset($_POST['user']) && isset ($_POST['pass'])){
-    $user = $_POST['user'];
-    $pass = $_POST['pass'];
-    
-}
-else {
-    echo "Enter username and password";
-}
 
 
 if (isset($_POST['login'])){
@@ -32,6 +21,7 @@ if (isset($_POST['login'])){
             if($count == 1) {
                 $userid = $row['userid'];
                 $_SESSION['user'] = $userid;
+                header("location:welcome.php");
             }
             else {
              $error = "Your Login Name or Password is invalid";
@@ -52,8 +42,8 @@ Username:
 <br>
 Password:
 <br>
-<input type="password" name="pass">
+<input type="password" name="pass" placeholder="Password">
 <br>
 <br>
-<input type="submit" name="login" value="login">
+<input type="submit" name="login" value="login"> <a href="sign-up.php">Not a Member yet Sign-up Here</a>
 </form>

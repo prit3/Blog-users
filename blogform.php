@@ -1,4 +1,12 @@
-<?php include ('mkblog.php'); ?>
+<?php 
+include ('mkblog.php'); 
+session_start();
+
+if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
+            header("location:login.php");
+}
+
+?>
 
 
 <!DOCTYPE HTML>
@@ -22,7 +30,7 @@
         <form action="blogform.php"  method="post">
              Auteurs Naam: 
             <br> 
-            <?php echo $naam; ?>
+            <?php echo $_SESSION['user']; ?>
             <br>
             <br>
             Title: 

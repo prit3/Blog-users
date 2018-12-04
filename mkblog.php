@@ -1,18 +1,19 @@
 <?php
 include ('dbconn.php');
+session_start();
 error_reporting(0);
 
-
+$name = $_SESSION['user'];
 empty ($_POST["title"]) ? $title = "" : $title = $_POST["title"];
 empty ($_POST["blogtext"]) ? $text = "" : $text = $_POST["blogtext"];
 
 $taged = $_POST['taged'];
-$mkblog = "INSERT INTO `BlogPosts` (id, Name, Title, Blogtext, tijd) VALUES (NULL, '$naam', '$title', '$text', CURRENT_TIMESTAMP)";
+$mkblog = "INSERT INTO `BlogPosts` (id, Name, Title, Blogtext, tijd) VALUES (NULL, '$name', '$title', '$text', CURRENT_TIMESTAMP)";
 
 
 
 if (isset($_POST['submit'])){
-	if (!empty($_POST['naam']) && $_POST['title'] && $_POST['blogtext'] && $_POST['taged']){
+	if (!empty($_POST['title']) && $_POST['blogtext'] && $_POST['taged']){
 	mysqli_query($conn, $mkblog);
     $last_id = $conn->insert_id;
             
