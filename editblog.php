@@ -1,10 +1,9 @@
 <?php
+session_start();
     include ('dbconn.php');
     $id = $_GET["id"];
 error_reporting(0);
-//if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
-//            header("location:login.php");
-//}
+
 
 ?>
 
@@ -21,11 +20,14 @@ error_reporting(0);
         <?php 
             include ('dbconn.php');
 
-                $post = "SELECT * FROM BlogPosts WHERE id='$id' LIMIT 1 ";
+                $post = "SELECT * FROM BlogPosts WHERE id='$id' LIMIT 1";
                 $result = $conn->query($post);
 
                 if ($result->num_rows>0){
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()){
+                    if ($_SESSION['user'] !== $row['Name']){
+                        header("location:viewblog.php");
+                    }
            
                         $naam = $row['Name'];
                         $title = $row['Title'];

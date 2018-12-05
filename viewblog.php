@@ -6,27 +6,48 @@ session_start();
 <html>
     <head>
         <style>
-            .blogtxt{
-                    border:1px solid black;
+            header {
+                position: sticky;
+                top:0;
+                background-color:gray;
+                max-width:100vw;
+                height:100px;
+                padding:10px;
+            }
+            body {
+                margin:0;
+            }
+            
+            .blogtxt {
+                    border: 1px solid black;
                     border-style: dashed dashed ridge dashed;
-                    width:250px;
-                    padding:5px;
-                    overflow:hidden;
+                    width: 250px;
+                    padding: 5px;
+                    overflow: hidden;
                     max-height: 40px;
                     white-space: pre-line;
                     word-break: break-all;
-                    text-overflow:ellipsis;}
-            .blogtxt:hover{
+                    text-overflow: ellipsis;
+            }
+            
+            .blogtxt:hover {
                 overflow: visible;
                 max-height: none;}
             .sign {
                 margin-right: 20px;
-                float: right;}
-        
+                float: right;
+            }
+            .left{float: left;}
+            
+            .divbody {
+                padding-top:10px; 
+                padding-left:10px;
+            }
+           
         </style>
     </head>
-    <body style="margin:0;">
-        <header style="position: fixed; background-color:gray; width:100%; padding:10px;">
+    <body>
+        <header>
                  <?php
                 
                 if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
@@ -37,6 +58,7 @@ session_start();
                 }
                 
                 ?>
+           
             <a href="blogform.php"><button>create</button></a>
             <a href="viewblog.php"><button>view</button></a>
             <a href="showtags.php"><button>viewtags</button></a>
@@ -58,12 +80,13 @@ session_start();
                     <option value="tuin">filter op tuin</option>
                 </select>
                 <input type="submit" name="update" value="Update">
-               
-
-                
             </form>
+              <form action="viewblog.php" method="get"> 
+                <input class="sign" type="search" placeholder="&#x1F50D" name="search">
+            </form> 
+           
         </header>
-        <div style="padding-top:110px; padding-left:10px;">
+        <div class="divbody" style="">
             <?php
 
             include ('dbconn.php');
@@ -114,15 +137,20 @@ session_start();
                     break;
 
                 case "tuin";
-                    $post = "SELECT * FROM RelBlogTags Where Tag_id = 13";
+                    $post = "SELECT * FROM RelBlogTags Where Tag_id = Tag_id";
                     echo "Blog is gefilterd op tuin";
                     break;
 
 
                 default:
                     $post = "SELECT * FROM BlogPosts ORDER BY BlogPosts.id DESC";
-                    echo "Blog is gesorteert op nieuwste post";
+                    echo "Blog is gesorteert op nieuwste post ";
             }
+           
+                if (isset($_GET['search'])){
+                $search = $_GET['search'];
+                    $post = "SELECT * FROM BlogPosts WHERE `Title` LIKE '%".$search."%' OR `Blogtext` LIKE '%".$search."%'";
+                }
             
 //            $post = "SELECT * FROM BlogPosts INNER JOIN Tags on BlogPosts.Tag_id = Tags.id";
                     
@@ -133,25 +161,26 @@ session_start();
                     $tagid = $row['Tag_id'];
                     echo '<div class=blog>';
                         echo '<p class="content">';
+                        echo '<a href="BPWC.php?id='.$row['id'].'">';
+                        echo $row['Title'];
+                        echo "</a>";
+                        
                             echo "<table>";
                                 echo "<tr>";
                                     echo "<td>"."Tijd:"."</td>";
-                                    echo "<td>".$row['tijd']."</td>"."<br>";
+                                    echo "<td>".$row['tijd']."</td>";
                                 echo "</tr>";
 
                                 echo "<tr>";
                                     echo "<td>"."Name: "."</td>";
-                                    echo "<td>".$row['Name']."</td>"."<br>";
+                                    echo "<td>".$row['Name']."</td>";
                                 echo "</tr>";
 
-                                echo "<tr>";
-                                    echo "<td>"."Title:"."</td>";
-                                    echo "<td>".$row['Title']."</td>"."<br>";
-                                echo "</tr>";
+                                
                     
                                 echo "<tr>";
                                     echo "<td>"."Tag:"."</td>";
-                                    echo "<td>".$row['Tag']."</td>"."<br>";
+                                    echo "<td>".$row['Tag']."</td>";
                                 echo "</tr>";
                             echo "</table>";
                             echo "<br>";
