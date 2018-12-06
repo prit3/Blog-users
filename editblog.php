@@ -47,7 +47,7 @@ error_reporting(0);
                             echo "<br>";
                             echo "Blogtext";
                             echo "<br>";
-                            echo "<textarea name='blogtext' cols='32' rows='4' placeholder='plaats hier je  blog bericht.'>$text</textarea>";
+                            echo "<textarea name='blogtext' cols='32' rows='4' placeholder='plaats hier je blog bericht.'>$text</textarea>";
                             echo "<br>";
                             echo "<input name='update' type='submit' value='Update'>";
                             echo "<input name='reset' type='reset' value='Reset'>";
