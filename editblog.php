@@ -15,7 +15,20 @@ error_reporting(0);
 
     </head>
     <body>
-
+        <a href="profile.php"><button>profile</button></a>
+        <a href="blogform.php"><button>create</button></a>
+        <a href="viewblog.php"><button>view</button></a>
+        <a href="showtags.php"><button>viewtags</button></a>
+                 <?php
+                
+                if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
+                    echo "<a href='login.php'><button class='sign'>login</button></a>";
+                }
+                else {
+                    echo "<a href='logout.php'><button class='sign'>logout</button></a>";
+                }
+                
+                ?>
         
         <?php 
             include ('dbconn.php');

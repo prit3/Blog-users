@@ -21,7 +21,8 @@ if (isset($_POST['login'])){
             if($count == 1) {
                 $userid = $row['userid'];
                 $_SESSION['user'] = $userid;
-                header("location:welcome.php");
+                $username = $_SESSION['user'];
+                header("location:profile.php?id=$username");
             }
             else {
              $error = "Your Login Name or Password is invalid";

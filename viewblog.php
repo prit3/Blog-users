@@ -48,16 +48,7 @@ session_start();
     </head>
     <body>
         <header>
-                 <?php
-                
-                if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
-                    echo "<a href='login.php'><button class='sign'>login</button></a>";
-                }
-                else {
-                    echo "<a href='logout.php'><button class='sign'>logout</button></a>";
-                }
-                
-                ?>
+            
            
             <a href="blogform.php"><button>create</button></a>
             <a href="viewblog.php"><button>view</button></a>
@@ -83,7 +74,18 @@ session_start();
             </form>
               <form action="viewblog.php" method="get"> 
                 <input class="sign" type="search" placeholder="&#x1F50D" name="search">
-            </form> 
+            </form>
+            <a href="profile.php?id=<?php echo $_SESSION['user']; ?>"><button>profile</button></a>
+                 <?php
+                
+                if ($_SESSION['user'] == 0 || $_SESSION['user'] == 1){
+                    echo "<a href='login.php'><button class='sign'>login</button></a>";
+                }
+                else {
+                    echo "<a href='logout.php'><button class='sign'>logout</button></a>";
+                }
+                
+                ?>
            
         </header>
         <div class="divbody">
@@ -190,7 +192,7 @@ session_start();
                     }
 
                     else {
-                        echo "<br>Er zijn geen comments";
+                        echo "<br>No blogs entries found";
                     }
 
             
